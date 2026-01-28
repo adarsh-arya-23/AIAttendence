@@ -1,0 +1,13 @@
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+embeddings/*.pkl
+unknown_faces/*.jpg
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+.env

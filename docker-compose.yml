@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./backend/uploads:/app/uploads
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=development
+      - AI_ENGINE_URL=http://ai-engine:5001
+    depends_on:
+      - ai-engine
+
+  ai-engine:
+    build: ./ai-engine
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./ai-engine:/app
+      - ./ai-engine/embeddings:/app/embeddings
+      - ./ai-engine/unknown_faces:/app/unknown_faces
+    environment:
+      - FLASK_ENV=development
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+
+volumes:
+  node_modules_backend:
+  node_modules_frontend:

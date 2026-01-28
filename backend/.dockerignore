@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.env
+src/database/*.db
+uploads/
+.git
+.gitignore
+Dockerfile
+docker-compose.yml

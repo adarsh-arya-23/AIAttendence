@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🎓 AI-Driven Facial Recognition Attendance System
 
 ## 📋 Problem Statement
@@ -29,9 +28,10 @@ An AI-based attendance system that allows teachers to simply click a photo of th
 
 - **Frontend**: React + Vite
 - **Backend API**: Node.js + Express
-- **AI Engine**: Python 3.14.2 + OpenCV + face_recognition
+- **AI Engine**: Python 3.11 + OpenCV + face_recognition
 - **Database**: SQLite (zero-cost, no setup required)
-- **Image Processing**: Pillow, NumPy
+- **Image Processing**: Pillow, NumPy, Dlib
+- **Containerization**: Docker & Docker Compose
 
 ## 🎛️ Core Features
 
@@ -42,98 +42,66 @@ An AI-based attendance system that allows teachers to simply click a photo of th
 ✅ Attendance analytics dashboard  
 ✅ Supports classroom sizes of 40-50 students  
 ✅ High-accuracy recognition workflow  
-✅ Ethical & responsible data handling  
 
 ## 📁 Project Structure
 
 ```
 ai-attendance-system/
 ├── backend/                 # Node.js API Server
-│   ├── src/
-│   │   ├── routes/         # API routes
-│   │   ├── controllers/    # Business logic
-│   │   ├── models/         # Database models
-│   │   └── middleware/     # Auth & validation
-│   ├── database/           # SQLite database
-│   └── uploads/            # Temporary image storage
 ├── ai-engine/              # Python AI Processing
-│   ├── face_processor.py   # Face detection & recognition
-│   ├── embeddings/         # Stored face embeddings
-│   └── requirements.txt    # Python dependencies
 ├── frontend/               # React Web App
-│   ├── src/
-│   │   ├── components/     # UI components
-│   │   ├── pages/          # Application pages
-│   │   └── services/       # API integration
-│   └── public/
+├── docker-compose.yml      # Docker orchestration
 └── docs/                   # Documentation
 ```
 
-## 🚀 Installation & Setup
+## 🚀 Quick Start (Using Docker) - Recommended
+
+The easiest way to run this project on any system (Windows, Mac, Linux) without installing Python or Node.js locally is using Docker.
 
 ### Prerequisites
-- Python 3.14.2
-- Node.js v22.20.0
-- npm or yarn
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
 
-### Step 1: Install Backend Dependencies
+### Installation & Run
 
-```bash
-cd backend
-npm install
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/adarsh-arya-23/AIAttendence.git
+   cd AIAttendence
+   ```
 
-### Step 2: Initialize Database
+2. **Set up Environment Variables**:
+   Create a `.env` file in the `backend` folder (you can use `.env.example` as a template).
 
-```bash
-npm run init-db
-```
+3. **Build and Start with Docker**:
+   ```bash
+   docker-compose up --build -d
+   ```
 
-### Step 3: Install AI Engine Dependencies
+4. **Initialize the Database** (Required for first-time setup):
+   ```bash
+   docker-compose exec backend npm run init-db
+   ```
 
-```bash
-cd ../ai-engine
-pip install -r requirements.txt
-```
+### Accessing the Application
+- **Frontend**: [http://localhost:5173](http://localhost:5173)
+- **Backend API**: [http://localhost:5000](http://localhost:5000)
+- **AI Engine**: [http://localhost:5001](http://localhost:5001)
 
-**Note for Windows users**: Installing `face_recognition` and `dlib` on Windows can be tricky. If you encounter issues:
+---
 
-```bash
-# Install dlib from wheel (recommended for Windows)
-pip install cmake
-pip install dlib
-pip install face_recognition
-```
+## 🛠️ Manual Installation (Advanced)
 
-### Step 4: Install Frontend Dependencies
+If you prefer to run the components locally without Docker:
 
-```bash
-cd ../frontend
-npm install
-```
+### Prerequisites
+- Python 3.11+
+- Node.js v22+
+- C++ Build Tools (Required for `dlib`)
 
-## 🏃 Running the Application
-
-### Start Backend Server (Terminal 1)
-```bash
-cd backend
-npm run dev
-```
-Server runs on: `http://localhost:5000`
-
-### Start AI Engine (Terminal 2)
-```bash
-cd ai-engine
-python face_processor.py
-```
-AI Engine runs on: `http://localhost:5001`
-
-### Start Frontend (Terminal 3)
-```bash
-cd frontend
-npm run dev
-```
-Frontend runs on: `http://localhost:5173`
+### Steps
+1. **Backend**: `cd backend && npm install && npm run init-db && npm run dev`
+2. **AI Engine**: `cd ai-engine && pip install -r requirements.txt && python face_processor.py`
+3. **Frontend**: `cd frontend && npm install && npm run dev`
 
 ## 📱 Usage Guide
 
@@ -178,11 +146,3 @@ MIT License - Free to use for educational institutions
 ## 👥 Authors
 
 Built with ❤️ for the education community
-
----
-
-**Made with 100% free and open-source tools** 🎉
-=======
-# AIAttendence
-Attendence using camera and AI
->>>>>>> c0a1a4718079b767b44c1262004797385d54006d

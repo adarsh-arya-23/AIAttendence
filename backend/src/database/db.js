@@ -2,6 +2,8 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import bcryptjs from 'bcryptjs';
+const bcrypt = bcryptjs.default || bcryptjs;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -121,8 +123,7 @@ export function initializeDatabase() {
 }
 
 // Seed initial admin user
-export function seedAdminUser() {
-  const bcrypt = await import('bcryptjs');
+export async function seedAdminUser() {
   const hashedPassword = bcrypt.hashSync('admin123', 10);
 
   const stmt = db.prepare(`
