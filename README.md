@@ -106,16 +106,38 @@ If you prefer to run the components locally without Docker:
 ## 📱 Usage Guide
 
 ### For Teachers:
-1. **Login** with admin credentials (`admin`/`admin123`)
-2. **Add Students** - Upload a clear photo of each student
-3. **Capture Photo** - Upload a classroom photo for attendance
-4. **Review & Submit** - The system detects faces and marks attendance automatically
+1. **Login** with your credentials
+2. **Create Session** - Select class, subject, date
+3. **Capture Photo** - Click classroom photo or upload
+4. **Review Results** - System shows detected students
+5. **Confirm/Override** - Approve or manually adjust
+6. **Submit** - Attendance saved automatically
+
+### For Admins:
+1. **Manage Students** - Add/edit student profiles with photos
+2. **View Analytics** - Session-wise and student-wise reports
+3. **Review Flags** - Check unknown faces and anomalies
+4. **Export Data** - Download attendance reports (CSV/PDF)
 
 ## 🔒 Security & Privacy
 
 - All face data stored locally (no cloud dependency)
-- Role-based access control (Admin/Teacher)
+- Encrypted database connections
+- Role-based access control (Admin/Teacher/Student)
+- GDPR-compliant data handling
 - Secure image upload validation
+
+## 🌍 Real-World Impact
+
+⏱ Saves cumulative teaching hours  
+🎓 Ensures fair and transparent attendance  
+🧾 Provides reliable digital records  
+🏫 Enables institutions to modernize without cost  
+💡 Encourages responsible AI adoption in education  
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our contributing guidelines before submitting PRs.
 
 ## 📄 License
 
