@@ -346,11 +346,15 @@ def update_threshold():
 
 
 if __name__ == '__main__':
+    # Use environment variable for port, default to 5001
+    port = int(os.environ.get('PORT', 5001))
+    
     print("\n" + "="*50)
-    print("🚀 AI Face Recognition Engine")
+    print("🚀 AI Face Recognition Engine Starting (Production Mode)")
     print("="*50)
     print(f"📊 Confidence Threshold: {CONFIDENCE_THRESHOLD}")
-    print(f"🌐 Starting server on http://localhost:5001")
+    print(f"🌐 Server port: {port}")
     print("="*50 + "\n")
     
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    # In production, we usually run with Gunicorn, but this allows local runs
+    app.run(host='0.0.0.0', port=port, debug=False)
