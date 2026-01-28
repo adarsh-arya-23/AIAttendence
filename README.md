@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎓 AI-Driven Facial Recognition Attendance System
 
 ## 📋 Problem Statement
@@ -181,3 +182,7 @@ Built with ❤️ for the education community
 ---
 
 **Made with 100% free and open-source tools** 🎉
+=======
+# AIAttendence
+Attendence using camera and AI
+>>>>>>> c0a1a4718079b767b44c1262004797385d54006d
