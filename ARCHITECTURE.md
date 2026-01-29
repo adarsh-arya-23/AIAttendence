@@ -11,14 +11,14 @@ The AI-Driven Attendance System is built using a **three-tier architecture**:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                         Frontend                             │
-│                    (React + Vite)                            │
+│                  (React + Vite in Docker)                    │
 │                  http://localhost:5173                       │
 └────────────────────────┬────────────────────────────────────┘
                          │ REST API
                          ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                      Backend API                             │
-│                  (Node.js + Express)                         │
+│               (Node.js + Express in Docker)                  │
 │                  http://localhost:5000                       │
 │                                                              │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
@@ -30,7 +30,7 @@ The AI-Driven Attendance System is built using a **three-tier architecture**:
                          ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                       AI Engine                              │
-│                  (Python + Flask)                            │
+│                (Python + Flask in Docker)                    │
 │                  http://localhost:5001                       │
 │                                                              │
 │  ┌──────────────────────────────────────────────────┐       │
@@ -259,28 +259,22 @@ Teacher captures photo → Frontend uploads
 4. **Caching**: Implement Redis for frequently accessed data
 5. **Load Balancing**: Use Nginx for multiple backend instances
 
-## Deployment Architecture (Production)
+## Deployment Architecture (Dockerized)
 
+The entire system is containerized using Docker, ensuring that the complex AI dependencies (dlib, face_recognition) and Node.js environment are consistent across all platforms.
+
+```mermaid
+graph TD
+    User([User]) --> Frontend[Frontend Container:5173]
+    Frontend --> Backend[Backend Container:5000]
+    Backend --> AI[AI Engine Container:5001]
+    Backend --> DB[(SQLite Database)]
 ```
-                    ┌─────────────┐
-                    │   Nginx     │
-                    │ (Reverse    │
-                    │  Proxy)     │
-                    └──────┬──────┘
-                           │
-            ┌──────────────┼──────────────┐
-            │              │              │
-      ┌─────▼─────┐  ┌────▼────┐  ┌─────▼─────┐
-      │ Frontend  │  │ Backend │  │ AI Engine │
-      │  (Static) │  │  (PM2)  │  │(Gunicorn) │
-      └───────────┘  └────┬────┘  └───────────┘
-                          │
-                     ┌────▼────┐
-                     │Database │
-                     │(SQLite/ │
-                     │ MySQL)  │
-                     └─────────┘
-```
+
+### CI/CD Workflow
+We use **GitHub Actions** to maintain code quality:
+1. **CI Check**: Verifies dependency installation and syntax.
+2. **Docker Build Check**: Ensures the container images build successfully on every push.
 
 ## Performance Optimization
 

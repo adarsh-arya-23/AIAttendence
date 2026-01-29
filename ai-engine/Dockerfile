@@ -29,4 +29,5 @@ RUN mkdir -p embeddings unknown_faces
 
 EXPOSE 5001
 
-CMD ["python", "face_processor.py"]
+# Run with Gunicorn for production
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "--workers", "4", "--timeout", "120", "face_processor:app"]

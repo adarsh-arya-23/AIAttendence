@@ -3,43 +3,65 @@ version: '3.8'
 services:
   backend:
     build: ./backend
+    container_name: ai-attendance-backend
+    restart: unless-stopped
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - ./backend/database:/app/database
       - ./backend/uploads:/app/uploads
-    env_file:
-      - ./backend/.env
+      - ./backend/logs:/app/logs
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - AI_ENGINE_URL=http://ai-engine:5001
-    depends_on:
-      - ai-engine
+      - DATABASE_PATH=./database/attendance.db
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   ai-engine:
     build: ./ai-engine
+    container_name: ai-attendance-ai-engine
+    restart: unless-stopped
     ports:
       - "5001:5001"
     volumes:
-      - ./ai-engine:/app
       - ./ai-engine/embeddings:/app/embeddings
       - ./ai-engine/unknown_faces:/app/unknown_faces
-    environment:
-      - FLASK_ENV=development
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5001/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   frontend:
     build: ./frontend
+    container_name: ai-attendance-frontend
+    restart: unless-stopped
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    environment:
-      - VITE_API_URL=http://localhost:5000/api
+      - "80:80"
     depends_on:
       - backend
-
-volumes:
-  node_modules_backend:
-  node_modules_frontend:
+      - ai-engine
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

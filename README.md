@@ -1,5 +1,9 @@
 # 🎓 AI-Driven Facial Recognition Attendance System
 
+[![CI](https://github.com/adarsh-arya-23/AIAttendence/actions/workflows/ci.yml/badge.svg)](https://github.com/adarsh-arya-23/AIAttendence/actions/workflows/ci.yml)
+[![Docker Build](https://github.com/adarsh-arya-23/AIAttendence/actions/workflows/docker-build.yml/badge.svg)](https://github.com/adarsh-arya-23/AIAttendence/actions/workflows/docker-build.yml)
+
+
 ## 📋 Problem Statement
 
 Traditional attendance marking in schools and colleges wastes 5-10 minutes per class, leading to:
@@ -82,6 +86,10 @@ The easiest way to run this project on any system (Windows, Mac, Linux) without 
    docker-compose exec backend npm run init-db
    ```
 
+5. **Access the App**:
+   - Frontend: [http://localhost:5173](http://localhost:5173)
+   - Login: `admin` / `admin123`
+
 ### Accessing the Application
 - **Frontend**: [http://localhost:5173](http://localhost:5173)
 - **Backend API**: [http://localhost:5000](http://localhost:5000)
@@ -137,7 +145,7 @@ If you prefer to run the components locally without Docker:
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+Contributions make the open-source community an amazing place to learn, inspire, and create. Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📄 License
 

@@ -1,3 +1,4 @@
+# Production-optimized Dockerfile
 FROM node:22-bullseye
 
 # Install build tools for better-sqlite3
@@ -9,15 +10,19 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
+# Install dependencies first for better caching
 COPY package*.json ./
+RUN npm install --omit=dev
 
-RUN npm install
-
+# Copy source code
 COPY . .
 
-# Ensure upload directories exist in the container
-RUN mkdir -p uploads/images uploads/photos
+# Create directories and set permissions
+RUN mkdir -p uploads/images uploads/photos logs && \
+    chmod -R 777 uploads logs
 
 EXPOSE 5000
 
-CMD ["npm", "run", "dev"]
+ENV NODE_ENV=production
+
+CMD ["node", "src/server.js"]
